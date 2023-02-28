@@ -9,17 +9,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserInfoUserDetails implements UserDetails {
+
     private String username;
     private String password;
 
     UserInfoUserDetails(UserInfo userInfo) {
-        this.username = userInfo.getUsername();
-        this.password = userInfo.getPassword();
+        username = userInfo.getUsername();
+        password = userInfo.getPassword();
     }
 
     @Override
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class UserInfoUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     @Override

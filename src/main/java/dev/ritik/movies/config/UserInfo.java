@@ -16,10 +16,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "USER_INFO")
 public class UserInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String username;
     private String password;
     private String email;
     private String roles;
+
 }
