@@ -3,49 +3,61 @@ package dev.ritik.movies.movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
+import dev.ritik.movies.utils.Util;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
+
     @Autowired
-    MovieService(MovieRepository movieRepository){
+    MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
-    public List<Movie>getAllMovies(){
+
+    public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
-    public Movie getMovieById(Long id){
+
+    public Movie getMovieById(Long id) {
         Optional<Movie> movie = movieRepository.findById(id);
         return movie.get();
     }
 
-    public Movie updateMovieById(Long id , Movie updatedMovie){
+    public Movie updateMovieById(Long id, Movie updatedMovie) {
         Movie fetchedMovie = movieRepository.findById(id).get();
-        if(updatedMovie.getTitle() != null){
+        if (updatedMovie.getTitle() != null) {
             fetchedMovie.setTitle(updatedMovie.getTitle());
         }
-        if(updatedMovie.getDescription() != null){
+        if (updatedMovie.getDescription() != null) {
             fetchedMovie.setDescription(updatedMovie.getDescription());
         }
-        if(updatedMovie.getRating() != null){
+        if (updatedMovie.getRating() != null) {
             fetchedMovie.setRating(updatedMovie.getRating());
         }
-        if(updatedMovie.getDownloads() != null){
+        if (updatedMovie.getDownloads() != null) {
             fetchedMovie.setDownloads(updatedMovie.getDownloads());
         }
         return movieRepository.save(fetchedMovie);
     }
-    public Movie addMovie(Movie movie){
-       return movieRepository.save(movie);
+
+    public Movie addMovie(Movie movie) {
+        return movieRepository.save(movie);
     }
 
-    public boolean deleteMovie(Long id){
-        if(!movieRepository.existsById(id)) return false;
+    public boolean deleteMovie(Long id) {
+        if (!movieRepository.existsById(id))
+            return false;
         Movie movie = movieRepository.findById(id).get();
         movieRepository.delete(movie);
         return true;
     }
+
+    public Movie getRandomMovie() {
+        Long randomRange = Util.generateRandomInt(1, 10);
+        return getMovieById(randomRange);
+    }
+
 }
