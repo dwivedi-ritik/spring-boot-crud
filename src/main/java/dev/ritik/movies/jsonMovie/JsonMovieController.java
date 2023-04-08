@@ -8,21 +8,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "api/v2/")
 public class JsonMovieController {
-    private final JsonMovieService jsonMovieService;
-
     @Autowired
-    JsonMovieController(JsonMovieService jsonMovieService) {
-        this.jsonMovieService = jsonMovieService;
-    }
+    private JsonMovieService jsonMovieService;
 
     @RequestMapping(path = "getAllMovies", method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public @ResponseBody MoviesJson getAllMovies() throws Exception {
         return jsonMovieService.getAllMovies();
     }
 
     @RequestMapping(path = "movies", method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public @ResponseBody MoviesJson getMovieById(@RequestParam("id") Long id) throws Exception {
         return jsonMovieService.getMovieById(id);
     }

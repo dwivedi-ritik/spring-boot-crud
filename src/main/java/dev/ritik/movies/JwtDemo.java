@@ -21,7 +21,7 @@ public class JwtDemo {
                 .compact();
         System.out.println(token);
 
-        Claims claim = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-        System.out.println(claim.getExpiration());
+        Claims claim = Jwts.parser().setSigningKey("some random").parseClaimsJws(token).getBody();
+        System.out.println(claim.getSubject());
     }
 }

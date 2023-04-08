@@ -9,14 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/movie")
+@RequestMapping(path = "api/v1/")
 public class MovieController {
-    private final MovieService movieService;
-
     @Autowired
-    MovieController(MovieService movieService) {
-        this.movieService = movieService;
-    }
+    private MovieService movieService;
 
     @RequestMapping(value = "getAllMovies", method = RequestMethod.GET)
     public List<Movie> getMovies() {
