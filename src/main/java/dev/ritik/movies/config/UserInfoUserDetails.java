@@ -13,7 +13,7 @@ public class UserInfoUserDetails implements UserDetails {
     private String username;
     private String password;
 
-    UserInfoUserDetails(UserInfo userInfo) {
+    public UserInfoUserDetails(UserInfo userInfo) {
         username = userInfo.getUsername();
         password = userInfo.getPassword();
     }
